@@ -19,9 +19,10 @@ namespace Server
         public void Main(string[] args)
         {
             server = new TcpListener(10000);
+            cars = new List<Car>();
+            users = new List<User>();
             server.Start();
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
-
         }
 
         private static void OnConnect(IAsyncResult ar)

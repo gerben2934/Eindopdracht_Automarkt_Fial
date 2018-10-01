@@ -19,7 +19,7 @@ namespace SharedData
         public FuelType FuelType { get; }
         public List<Bid> bids { get; }
 
-        public Car(int carID, string brand, string model, string description, int mileage, string color, int year, Status status, FuelType fuelType)
+        public Car(int carID, string brand, string model, string description, int mileage, string color, int year, Status Status, FuelType FuelType)
         {
             this.CarID = carID;
             this.Brand = brand;
