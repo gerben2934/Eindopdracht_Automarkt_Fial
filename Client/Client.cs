@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SharedData;
 
-namespace Client
+namespace Clienta
 {
-    class Client
+    public class Client
     {
         private static byte[] buffer = new byte[1024];
         private static string totalBuffer = "";
