@@ -9,5 +9,7 @@
     <Import_RootNamespace>SharedData</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Bid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Car.cs" />
   </ItemGroup>
 </Project>
