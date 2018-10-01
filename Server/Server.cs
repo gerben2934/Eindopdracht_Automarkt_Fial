@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class Server
+    public class Server
     {
         public static List<Car> cars { get; set; }
         static List<User> users = new List<User>();
@@ -23,7 +23,9 @@ namespace Server
     
         public static void Main(string[] args)
         {
-            server = new TcpListener(9876);
+            server = new TcpListener(10000);
+            Cars = new List<Car>();
+            Users = new List<User>();
             server.Start();
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
 
@@ -42,15 +44,15 @@ namespace Server
 
         public static void Broadcast()
         {
-            foreach (User user in users)
+            foreach (User user in Users)
             {
                 //Do statement
             }
         }
 
-        public static void BroadcastExcept(User user, dynamic data)
+        public static void BroadcastExcept(User User, dynamic data)
         {
-            foreach (User u in users.Where(u => u != user))
+            foreach (User u in Users.Where(u => u != User))
                 u.Send(data);
         }
     }

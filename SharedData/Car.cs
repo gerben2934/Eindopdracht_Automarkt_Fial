@@ -6,7 +6,7 @@ using System.Text;
 namespace SharedData
 {
 
-    class Car
+    public class Car
     {
         public int CarID { get; set; }
         public string Brand { get; }
@@ -38,8 +38,6 @@ namespace SharedData
 //            return $"carID: {CarID}\n, brand: {Brand}\n, model: {Model}\n, description: {Description}\n, mileage: {Mileage}\n, color: {Color}\n, year: {Year}\n, bids: {bids.Count()}.";
 //        }
 
-        public enum Status { ForSale, Sold }
-        public enum FuelType { Gasoline, Diesel, Gas, Electric }
 
     }
 }

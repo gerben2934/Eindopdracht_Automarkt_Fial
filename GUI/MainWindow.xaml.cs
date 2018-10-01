@@ -1,4 +1,5 @@
 ﻿using SharedData;
+using Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,17 +26,13 @@ namespace GUI
     {
         private Client client;
         private List<Car> cars;
-
+        
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public void GetCars()
-        {
-            Server.
-        }
-
+        
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             for (int i = 0; i < cars.Count; i++)

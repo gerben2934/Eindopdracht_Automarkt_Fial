@@ -81,5 +81,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="..\SharedData\SharedData.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{57691e44-e6a5-4a7e-b427-539604039a5a}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

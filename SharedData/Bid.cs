@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SharedData
 {
-    class Bid
+    public class Bid
     {
         public int Amount { get; set; }
         public DateTime time { get; }
