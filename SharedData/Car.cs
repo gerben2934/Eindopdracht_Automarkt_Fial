@@ -8,18 +8,21 @@ namespace SharedData
 
     public class Car
     {
+        public enum Status { FORSALE, SOLD, REMOVED }
+        public enum FuelType { GAS, ELECTRIC, DIESEL }
+
         public int CarID { get; set; }
-        public string Brand { get; }
-        public string Model { get; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
         public string Description { get; set; }
-        public int Mileage { get; }
+        public int Mileage { get; set; }
         public string Color { get; set; }
-        public int Year { get; }
-       // public Status Status { get; set; }
-        //public FuelType FuelType { get; }
+        public int Year { get; set; }
+        public Status CarStatus { get; set; }
+        public FuelType CarFuelType { get; set; }
         public List<Bid> bids { get; }
 
-        public Car(int carID, string brand, string model, string description, int mileage, string color, int year)
+        public Car(int carID, string brand, string model, string description, int mileage, string color, int year, Status status, FuelType fuelType)
         {
             this.CarID = carID;
             this.Brand = brand;
@@ -28,9 +31,9 @@ namespace SharedData
             this.Mileage = mileage;
             this.Color = color;
             this.Year = year;
-         //   this.Status = status;
-         //   this.FuelType = fuelType;
-            bids = new List<Bid>();
+            this.CarStatus = status;
+            this.CarFuelType = fuelType;
+            //carbids = new List<Bid>();
         }
 
 //        public override string ToString()

@@ -7,17 +7,23 @@ namespace SharedData
     public class Bid
     {
         public int Amount { get; set; }
-        public DateTime time { get; }
+        public DateTime Time { get; set; }
 
         public Bid(int amount)
         {
             this.Amount = amount;
-            //time = DateTime.Now();
+            this.Time = DateTime.Now;
+        }
+
+        public Bid(int amount, DateTime time)
+        {
+            this.Amount = amount;
+            this.Time = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return $"amount: {Amount}\n, time: {time}";
+            return $"amount: {Amount}\n, time: {Time}";
         }
     }
 }

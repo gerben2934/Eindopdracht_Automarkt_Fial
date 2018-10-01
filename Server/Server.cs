@@ -1,4 +1,5 @@
 ﻿using SharedData;
+using SharedData.Packets;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,15 +13,17 @@ namespace Server
 {
     public class Server
     {
-        public static List<Car> cars { get; set; }
-        static List<User> users = new List<User>();
+        public static List<Car> Cars { get; set; }
+        static List<User> Users = new List<User>();
         public static List<TcpClient> Clients { get; set; }
 
         public static TcpClient client { get; set; }
 
         private static TcpListener server;
 
-    
+        public static Car ToyotaYaris;
+
+
         public static void Main(string[] args)
         {
             server = new TcpListener(10000);
@@ -35,10 +38,10 @@ namespace Server
         private static void OnConnect(IAsyncResult ar)
         {
             client = server.EndAcceptTcpClient(ar);
-            users.Add(new User(client));
-
-            MessageUtil.sendMessage(new OkMessage(), client.GetStream());
-
+            Users.Add(new User(client));
+            FillCars();
+            //MessageUtil.sendMessage(new OkMessage("Het werkt"), client.GetStream());
+            MessageUtil.sendMessage(new CarMessage(ToyotaYaris), client.GetStream());
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
         }
 
@@ -50,10 +53,16 @@ namespace Server
             }
         }
 
-        public static void BroadcastExcept(User User, dynamic data)
+        public static void FillCars()
         {
-            foreach (User u in Users.Where(u => u != User))
-                u.Send(data);
+            ToyotaYaris = new Car(001, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
+            Cars.Add(ToyotaYaris);
         }
+
+        //public static void BroadcastExcept(User User, dynamic data)
+        //{
+        //    foreach (User u in Users.Where(u => u != User))
+        //        u.Send(data);
+        //}
     }
 }

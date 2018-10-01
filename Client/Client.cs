@@ -17,7 +17,7 @@ namespace Clienta
         static void Main(string[] args)
         {
             client = new TcpClient();
-            client.Connect("localhost", 9876);
+            client.Connect("localhost", 10000);
 
             //client.GetStream().BeginRead(buffer, 0, 1024, new AsyncCallback(OnRead), null);
             Receive();

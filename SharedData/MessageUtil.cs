@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SharedData.Packets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,8 +11,9 @@ namespace SharedData
 {
     class MessageUtil
     {
-        public static void sendMessage(OkMessage message, NetworkStream _stream)
+        public static void sendMessage(CarMessage message, NetworkStream _stream)
         {
+
             try
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message.ToJson()));

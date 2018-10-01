@@ -16,11 +16,9 @@ namespace Server
         public User(TcpClient client)
         {
             this.client = client;
-            MessageUtil.sendMessage(new OkMessage(), client.GetStream());
+            //MessageUtil.sendMessage(new OkMessage("Test2.0"), client.GetStream());
         }
-
- 
-
+    
         private void ReadAsync()
         {
             Task.Factory.StartNew(() =>
