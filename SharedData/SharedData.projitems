@@ -11,5 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Bid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Car.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OkMessage.cs" />
   </ItemGroup>
 </Project>

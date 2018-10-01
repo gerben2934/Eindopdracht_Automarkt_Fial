@@ -13,21 +13,26 @@ namespace Server
     {
         public static List<Car> cars { get; set; }
         public static List<User> users { get; set; }
+        public static List<TcpClient> Clients { get; set; }
 
         private static TcpListener server;
 
-        public void Main(string[] args)
+    
+        public static void Main(string[] args)
         {
-            server = new TcpListener(10000);
+            server = new TcpListener(9876);
             server.Start();
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
 
+            Console.ReadKey();
         }
 
         private static void OnConnect(IAsyncResult ar)
         {
             TcpClient client = server.EndAcceptTcpClient(ar);
-            users.Add(new User(client));
+            //Clients.Add(client);
+
+            MessageUtil.sendMessage(new OkMessage(), client.GetStream());
 
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
         }

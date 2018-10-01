@@ -12,7 +12,7 @@ namespace SharedData
         public Bid(int amount)
         {
             this.Amount = amount;
-            time = DateTime.Now();
+            //time = DateTime.Now();
         }
 
         public override string ToString()

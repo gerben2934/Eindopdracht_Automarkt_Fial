@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,9 @@ namespace Server
         }
 
 
-
         private void OnRead(IAsyncResult ar)
-        {
-            throw new NotImplementedException();
+        {                                                                                                   
+            client.GetStream().BeginRead(buffer, 0, 1024, new AsyncCallback(OnRead), this);
         }
 
         public void Send(String data)
