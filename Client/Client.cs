@@ -22,8 +22,6 @@ namespace Clienta
             //client.GetStream().BeginRead(buffer, 0, 1024, new AsyncCallback(OnRead), null);
             Receive();
             Console.ReadKey();
-
-
         }
 
         public static void Receive()

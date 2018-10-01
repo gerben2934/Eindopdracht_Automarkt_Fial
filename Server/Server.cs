@@ -1,6 +1,7 @@
 ﻿using SharedData;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Dynamic;
 using System.Linq;
 using System.Net.Sockets;
@@ -12,8 +13,10 @@ namespace Server
     class Server
     {
         public static List<Car> cars { get; set; }
-        public static List<User> users { get; set; }
+        static List<User> users = new List<User>();
         public static List<TcpClient> Clients { get; set; }
+
+        public static TcpClient client { get; set; }
 
         private static TcpListener server;
 
@@ -29,8 +32,8 @@ namespace Server
 
         private static void OnConnect(IAsyncResult ar)
         {
-            TcpClient client = server.EndAcceptTcpClient(ar);
-            //Clients.Add(client);
+            client = server.EndAcceptTcpClient(ar);
+            users.Add(new User(client));
 
             MessageUtil.sendMessage(new OkMessage(), client.GetStream());
 
