@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +13,25 @@ namespace Clienta
     {
         private static byte[] buffer = new byte[1024];
         private static string totalBuffer = "";
-        static TcpClient client;
+        public TcpClient Socket { get; private set; }
 
-        static void Main(string[] args)
+        private const ushort PORT = 10000;
+
+        public Client(TcpClient client)
         {
-            client = new TcpClient();
-            client.Connect("localhost", 10000);
+            Socket = client;
+            Socket.Connect("localhost", PORT);
 
             //client.GetStream().BeginRead(buffer, 0, 1024, new AsyncCallback(OnRead), null);
             Receive();
             Console.ReadKey();
+        }
+
+        public static Client FindClientByAdress(List<Client> clients, EndPoint address)
+        {
+            Client c = clients.Find(x =>
+                (x.Socket.Client.RemoteEndPoint == address));
+            return c;
         }
 
         public static void Receive()
@@ -30,7 +40,7 @@ namespace Clienta
             {
                 while (true)
                 {
-                    Console.WriteLine(MessageUtil.ReadMessage(client));
+                    Console.WriteLine(MessageUtil.ReadMessage(Socket));
                 }
             });
         }
