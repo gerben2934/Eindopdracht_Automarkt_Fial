@@ -17,6 +17,8 @@ namespace Server
         static List<User> Users = new List<User>();
         public static List<TcpClient> Clients { get; set; }
 
+        private const ushort PORT = 10000;
+
         public static TcpClient client { get; set; }
 
         private static TcpListener server;
@@ -26,7 +28,7 @@ namespace Server
 
         public static void Main(string[] args)
         {
-            server = new TcpListener(10000);
+            server = new TcpListener(PORT);
             Cars = new List<Car>();
             Users = new List<User>();
             server.Start();
@@ -52,6 +54,35 @@ namespace Server
                 //Do statement
             }
         }
+
+        private void HandlePacket(dynamic jsonData, TcpClient client)
+        {
+            string packetType = jsonData.packetType;
+            switch(packetType)
+            {
+                case nameof(BidMessage):
+                    BidMessage bm = SharedData.Packets.BidMessage.ToClass(jsonData);
+                    ClientUpdate(bm);
+                    break;
+                case nameof(CarMessage):
+                    CarMessage cm = SharedData.Packets.CarMessage.ToClass(jsonData);
+                    ClientUpdate(cm);
+                    break;
+                    
+            }
+        }
+
+        private void NewBid(TcpClient client, BidMessage bid) //bool? voor feedback gebruiker
+        {
+            
+        }
+
+        private void ClientUpdate(dynamic update)
+        {
+
+        }
+
+
 
         public static void FillCars()
         {
