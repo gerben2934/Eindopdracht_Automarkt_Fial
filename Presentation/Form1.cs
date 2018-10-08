@@ -54,7 +54,7 @@ namespace Presentation
         {
             MessageTextBox.Invoke((Action)(() =>
             {
-                MessageTextBox.AppendText(message + "\r\n");
+                MessageTextBox.AppendText("\r\n" + message + "\r\n");
             }));
         }
     }

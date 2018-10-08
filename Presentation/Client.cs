@@ -5,8 +5,11 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Presentation;
 using SharedData;
+using SharedData.Packets;
 
 namespace ClientGUI
 {
@@ -28,26 +31,40 @@ namespace ClientGUI
             //Receive();
         }
 
-        //public Client FindClientByAdress(List<Client> clients, EndPoint address)
-        //{
-        //    Client c = clients.Find(x =>
-        //        (x.Socket.Client.RemoteEndPoint == address));
-        //    return c;
-        //}
-
         public void Receive()
         {
-            //Form1.GetInstance().UpdateTextBox("Listening!");
-
             Task.Factory.StartNew(() =>
             {
                 while (true)
                 {
-                    Form1.GetInstance().UpdateTextBox((MessageUtil.ReadMessage(Socket)));
+                    dynamic data = MessageUtil.ReadMessage(Socket);
+                    dynamic handler = HandlePacket(data);
+                    //HandlePacket(data);
+                    Form1.GetInstance().UpdateTextBox(handler.ToString());
                     //Debug.WriteLine(MessageUtil.ReadMessage(Socket));
                 }
             });
         }
 
+        private dynamic HandlePacket(dynamic jsonData)
+        {
+            string packetType = jsonData.packetType;
+            switch (packetType)
+            {
+                case nameof(BidMessage):
+                    BidMessage bm = SharedData.Packets.BidMessage.ToClass(jsonData);
+                    //ClientUpdate(bm);
+                    return bm.Bid;
+                    break;
+                case nameof(CarMessage):
+                    CarMessage cm = SharedData.Packets.CarMessage.ToClass(jsonData);
+                    //ClientUpdate(cm);
+                    return cm.Car;
+                    break;
+
+            }
+
+            return null;
+        }
     }
 }

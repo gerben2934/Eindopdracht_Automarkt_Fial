@@ -36,10 +36,10 @@ namespace SharedData
             //carbids = new List<Bid>();
         }
 
-//        public override string ToString()
-//        {
-//            return $"carID: {CarID}\n, brand: {Brand}\n, model: {Model}\n, description: {Description}\n, mileage: {Mileage}\n, color: {Color}\n, year: {Year}\n, bids: {bids.Count()}.";
-//        }
+        public override string ToString()
+        {
+            return $"Bieding: \r\n carID: {CarID}\r\n, brand: {Brand}\r\n, model: {Model}\r\n, description: {Description}\r\n, mileage: {Mileage}\r\n, color: {Color}\r\n, year: {Year}\r\n";
+        }
 
 
     }
