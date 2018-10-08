@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,14 +14,14 @@ namespace Server
 
         public Car Car { get; private set; }
         public int AuctionID { get; private set; }
-        public List<Client> Clients { get; private set; }
-        public Client SuccessfullBidder { get; private set; } = null;
+        public List<TcpClient> Clients { get; private set; }
+        public TcpClient SuccessfullBidder { get; private set; } = null;
         public int AuctionTime { get; set; }
         public DateTime StartTime { get; private set; }
         public bool Running { get; private set; }
 
 
-        public Auction(List<Client> clients, Car car)
+        public Auction(List<TcpClient> clients, Car car)
         {
             Clients = clients;
             Car = car;
@@ -35,12 +36,12 @@ namespace Server
             StartTime = DateTime.Now;
         }
 
-        public string ClientsToString(List<Client>clients)
+        public string ClientsToString(List<TcpClient> clients)
         {
             string ClientList = "Clients in this Room:";
-            foreach (Client c in clients)
+            foreach (TcpClient c in clients)
             {
-                ClientList += $"\r\n- Client: {c.Socket.Client.LocalEndPoint}";
+                //ClientList += $"\r\n- Client: {c.Socket.Client.LocalEndPoint}";
             }
             return ClientList;
         }
@@ -56,7 +57,7 @@ namespace Server
             return Bids;
         }
 
-        public string ToString(List<Client> clients, Car car)
+        public string ToString(List<TcpClient> clients, Car car)
         {
             string Auction = "";
             Auction += $"Auction number: {AuctionID}, AuctionTime: {AuctionTime}, Running: {Running}\n\r";

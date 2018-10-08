@@ -11,7 +11,7 @@ namespace SharedData
 {
     class MessageUtil
     {
-        public static void sendMessage(CarMessage message, NetworkStream _stream)
+        public static void SendMessage(CarMessage message, NetworkStream _stream)
         {
 
             try

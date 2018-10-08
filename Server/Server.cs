@@ -13,6 +13,7 @@ namespace Server
 {
     public class Server
     {
+        public TcpClient Client123;
         public static List<Car> Cars { get; set; }
         static List<User> Users = new List<User>();
         public static List<TcpClient> Clients { get; set; }
@@ -35,6 +36,7 @@ namespace Server
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
 
             Console.ReadKey();
+
         }
 
         private static void OnConnect(IAsyncResult ar)
@@ -43,7 +45,7 @@ namespace Server
             Users.Add(new User(client));
             FillCars();
             //MessageUtil.sendMessage(new OkMessage("Het werkt"), client.GetStream());
-            MessageUtil.sendMessage(new CarMessage(ToyotaYaris), client.GetStream());
+            MessageUtil.SendMessage(new CarMessage(ToyotaYaris), client.GetStream());
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
         }
 
@@ -68,7 +70,6 @@ namespace Server
                     CarMessage cm = SharedData.Packets.CarMessage.ToClass(jsonData);
                     ClientUpdate(cm);
                     break;
-                    
             }
         }
 
@@ -81,8 +82,6 @@ namespace Server
         {
 
         }
-
-
 
         public static void FillCars()
         {
