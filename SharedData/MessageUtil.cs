@@ -27,7 +27,7 @@ namespace SharedData
             stream.WriteAsync(buffer, 0, buffer.Length);
         }
 
-        public static dynamic ReadMessage(TcpClient client)
+        public static async Task<dynamic> ReadMessage(TcpClient client)
         {
             NetworkStream networkStream = client.GetStream();
             byte[] sizeInfo = new byte[4];

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Presentation;
@@ -33,11 +34,11 @@ namespace ClientGUI
 
         public void Receive()
         {
-            Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(async () =>
             {
                 while (true)
                 {
-                    dynamic data = MessageUtil.ReadMessage(Socket);
+                    dynamic data = await MessageUtil.ReadMessage(Socket);
                     dynamic handler = HandlePacket(data);
                     //HandlePacket(data);
                     Form1.GetInstance().UpdateTextBox(handler.ToString());
@@ -60,6 +61,9 @@ namespace ClientGUI
                     CarMessage cm = SharedData.Packets.CarMessage.ToClass(jsonData);
                     //ClientUpdate(cm);
                     return cm.Car;
+                    break;
+                case nameof(OkMessage):
+                    Console.WriteLine(jsonData);
                     break;
 
             }

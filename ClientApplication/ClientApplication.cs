@@ -43,11 +43,11 @@ namespace ClientApplication
 
         public void Receive()
         {
-            Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(async () =>
             {
                 while (true)
                 {
-                    Console.WriteLine(MessageUtil.ReadMessage(Socket));
+                    Console.WriteLine(await MessageUtil.ReadMessage(Socket));
                 }
             });
         }

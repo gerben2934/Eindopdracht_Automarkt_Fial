@@ -42,9 +42,10 @@ namespace Server
             Users.Add(new User(client));
             FillCars();
 
+            Broadcast();
+
             //MessageUtil.sendMessage(new OkMessage("Het werkt"), client.GetStream());
             //MessageUtil.SendMessage(new CarMessage(ToyotaYaris), client.GetStream());
-
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
         }
 
@@ -52,7 +53,8 @@ namespace Server
         {
             foreach (User user in Users)
             {
-                //Do statement
+                Console.WriteLine("werkt dit?");
+                MessageUtil.SendMessage(new CarMessage(ToyotaYaris), user.client.GetStream());
             }
         }
 
