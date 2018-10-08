@@ -54,7 +54,8 @@ namespace Server
             foreach (User user in Users)
             {
                 Console.WriteLine("werkt dit?");
-                MessageUtil.SendMessage(new CarMessage(ToyotaYaris), user.client.GetStream());
+                //MessageUtil.SendMessage(new CarMessage(ToyotaYaris), user.client.GetStream());
+                MessageUtil.SendMessage(new OkMessage("test"), user.client.GetStream() );
             }
         }
 

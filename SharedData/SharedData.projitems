@@ -15,6 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Packets\CarMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packets\IPacket.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MessageUtil.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Packets\Message.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets\OkMessage.cs" />
   </ItemGroup>
 </Project>

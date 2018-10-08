@@ -4,7 +4,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace SharedData
+namespace SharedData.Packets
 {
 
     /**
@@ -52,7 +52,16 @@ namespace SharedData
 
         dynamic IPacket.ToJson()
         {
-            throw new NotImplementedException();
+            dynamic json = new
+            {
+                packetType = nameof(OkMessage),
+                data = new
+                {
+                    message = Message
+                }
+            };
+
+            return JsonConvert.SerializeObject(json);
         }
     }
 }
