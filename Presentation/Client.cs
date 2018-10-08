@@ -63,7 +63,7 @@ namespace ClientGUI
                     return cm.Car;
                     break;
                 case nameof(OkMessage):
-                    Console.WriteLine(jsonData);
+                    return jsonData;
                     break;
 
             }
