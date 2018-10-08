@@ -19,17 +19,19 @@ namespace Presentation
         private static Form1 instance;
         private TcpClient serverClient;
 
-        public TextBox MessageTetTextBox { get; set; }
+        public TextBox MessageTextBox { get; set; }
+        public TextBox UsernameTextBox { get; set; }
+        public Button ConnectButton { get; set; }
+        public TextBox BidTextBox { get; set; }
 
         public Form1()
         {
             InitializeComponent();
-            this.MessageTetTextBox = MessageTextBox;
+            this.MessageTextBox = messageTextBox;
+            this.UsernameTextBox = usernameLabel;
+            this.ConnectButton = connectButton;
+            this.BidTextBox = bidTextBox;
 
-            MessageTextBox.AppendText("Bieding is gestart!!");
-
-            Thread thread = new Thread(ClientThread);
-            thread.Start(new Client("Ralph"));
         }
 
         public static Form1 GetInstance()
@@ -52,10 +54,37 @@ namespace Presentation
 
         public void UpdateTextBox(string message)
         {
-            MessageTextBox.Invoke((Action)(() =>
+            messageTextBox.Invoke((Action)(() =>
             {
-                MessageTextBox.AppendText("\r\n" + message + "\r\n");
+                messageTextBox.AppendText("\r\n" + message + "\r\n");
             }));
+        }
+
+        private void UsernameLabel_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConnectButton_Click(object sender, EventArgs e)
+        {
+            string username = UsernameTextBox.Text;
+            ConnectButton.Enabled = false;
+            Thread thread = new Thread(ClientThread);
+            thread.Start(new Client(username));
+
+            messageTextBox.AppendText(username + " is verbonden!");
+        }
+
+        private void bidButton_Click(object sender, EventArgs e)
+        {
+            if (connectButton.Enabled == false)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Maak eerst verbinding!", "Error!");
+            }
         }
     }
 }

@@ -20,8 +20,6 @@ namespace Server
 
         private const ushort PORT = 10000;
 
-        public static TcpClient client { get; set; }
-
         private static TcpListener server;
 
         public static Car ToyotaYaris;
@@ -31,7 +29,7 @@ namespace Server
         {
             server = new TcpListener(PORT);
             Cars = new List<Car>();
-            Users = new List<User>();
+
             server.Start();
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
 
@@ -40,12 +38,12 @@ namespace Server
 
         private static void OnConnect(IAsyncResult ar)
         {
-            client = server.EndAcceptTcpClient(ar);
+            TcpClient client = server.EndAcceptTcpClient(ar);
             Users.Add(new User(client));
-            Console.WriteLine(Users);
             FillCars();
+
             //MessageUtil.sendMessage(new OkMessage("Het werkt"), client.GetStream());
-            MessageUtil.SendMessage(new CarMessage(ToyotaYaris), client.GetStream());
+            //MessageUtil.SendMessage(new CarMessage(ToyotaYaris), client.GetStream());
 
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
         }
@@ -89,11 +87,5 @@ namespace Server
             ToyotaYaris = new Car(001, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
             Cars.Add(ToyotaYaris);
         }
-
-        //public static void BroadcastExcept(User User, dynamic data)
-        //{
-        //    foreach (User u in Users.Where(u => u != User))
-        //        u.Send(data);
-        //}
     }
 }

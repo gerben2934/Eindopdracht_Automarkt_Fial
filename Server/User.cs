@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using SharedData;
+using SharedData.Packets;
 
 namespace Server
 {
@@ -16,14 +17,14 @@ namespace Server
         public User(TcpClient client)
         {
             this.client = client;
-            //MessageUtil.sendMessage(new OkMessage("Test2.0"), client.GetStream());
+            ReadAsync();
         }
     
         private void ReadAsync()
         {
             Task.Factory.StartNew(() =>
             {
-
+                MessageUtil.SendMessage(new CarMessage(Server.Cars[0]), client.GetStream());
             });
         }
     }
