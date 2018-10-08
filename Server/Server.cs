@@ -36,16 +36,17 @@ namespace Server
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
 
             Console.ReadKey();
-
         }
 
         private static void OnConnect(IAsyncResult ar)
         {
             client = server.EndAcceptTcpClient(ar);
             Users.Add(new User(client));
+            Console.WriteLine(Users);
             FillCars();
             //MessageUtil.sendMessage(new OkMessage("Het werkt"), client.GetStream());
             MessageUtil.SendMessage(new CarMessage(ToyotaYaris), client.GetStream());
+
             server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
         }
 

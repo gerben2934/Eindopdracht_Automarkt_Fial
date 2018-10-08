@@ -20,12 +20,12 @@ namespace ClientApplication
 
         public static void Main(string[] args)
         {
-            new Client(Socket, "Gerben");
+            new Client("Gerben");
         }
 
-        public Client(TcpClient client, string username)
+        public Client(string username)
         {
-            Socket = client;
+            Socket = new TcpClient();
             Socket.Connect("localhost", PORT);
             Username = username;
 
