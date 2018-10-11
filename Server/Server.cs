@@ -13,8 +13,8 @@ namespace Server
 {
     public class Server
     {
-        public List<Car> Cars { get; set; }
-        public List<User> Users { get; }
+        public static List<Car> Cars { get; set; }
+        public static List<User> Users { get; set; }
         public List<TcpClient> Clients { get; set; }
 
         private const ushort PORT = 10000;
@@ -53,7 +53,7 @@ namespace Server
             //MessageUtil.SendMessage(new CarMessage(ToyotaYaris), client.GetStream());
         }
 
-        public void BroadcastAsync(IPacket packet)
+        public static void BroadcastAsync(IPacket packet)
         {
             Console.WriteLine("Broadcast");
             foreach (User user in Users)

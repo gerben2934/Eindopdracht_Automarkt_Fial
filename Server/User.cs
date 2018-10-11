@@ -48,17 +48,31 @@ namespace Server
 
         private void HandleBidMessage(BidMessage message)
         {
-            Console.WriteLine("Received BidMessage");
+            Console.WriteLine("USER Received BidMessage");
+            Bid b = message.Bid;
+                foreach (Car c in Server.Cars)
+                {
+                    if (c.CarID == b.CarId)
+                    {
+                        c.Bids.Add(b);
+                        Car CurrentCar = c;
+                        Console.WriteLine("Bieding toegevoegd!");
+                        Server.BroadcastAsync(new CarMessage(CurrentCar));
+                        Console.WriteLine("Auto gebroadcast!");
+                        Console.WriteLine("Aantal biedingen: " + CurrentCar.Bids.Count());
+                    }
+            }
         }
 
         private void HandleCarMessage(CarMessage message)
         {
-            Console.WriteLine("Received CarMessage");
+            Console.WriteLine("USER: Received CarMessage");
+            Car CurrentCar = message.Car;
         }
 
         private void HandleOkMessage(OkMessage message)
         {
-            Console.WriteLine("Received OkMessage");
+            Console.WriteLine("USER: Received OkMessage");
         }
     }
 }

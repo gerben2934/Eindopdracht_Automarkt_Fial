@@ -50,17 +50,22 @@ namespace ClientGUI
 
         private void HandleBidMessage(BidMessage message)
         {
+            Console.WriteLine("CLIENT: received bid message");
+            Bid b = message.Bid;
+            
         }
 
         private void HandleCarMessage(CarMessage message)
         {
+            Console.WriteLine("CLIENT: received car Message");
             CurrentCar = message.Car;
+            Console.WriteLine("Currentcar: " + CurrentCar);
             Form1.GetInstance().UpdateTextBox(CurrentCar.ToString());
         }
 
         private void HandleOkMessage(OkMessage message)
         {
-            Console.WriteLine("Ok");
+            Console.WriteLine("CLIENT: received OK message");
         }
     }
 }
