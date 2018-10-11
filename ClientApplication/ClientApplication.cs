@@ -47,7 +47,8 @@ namespace ClientApplication
             {
                 while (true)
                 {
-                    Console.WriteLine(await MessageUtil.ReadMessage(Socket));
+                    Console.WriteLine(await MessageUtil.ReadMessage(Socket) + "IP server: " + Socket.Client.RemoteEndPoint.ToString());
+
                 }
             });
         }

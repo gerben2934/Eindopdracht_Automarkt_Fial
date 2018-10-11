@@ -4,9 +4,17 @@ using System.Text;
 
 namespace SharedData
 {
-    interface IPacket
+    public interface IPacket
     {
+        PacketType Type { get; }
         dynamic ToJson();
         IPacket ToClass(dynamic json);
+    }
+
+    public enum PacketType
+    {
+        OkMessage,
+        BidMessage,
+        CarMessage
     }
 }

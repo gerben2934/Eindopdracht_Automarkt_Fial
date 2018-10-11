@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
@@ -10,76 +11,54 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClientGUI;
+using SharedData;
+using SharedData.Packets;
 
 namespace Presentation
 {
     public partial class Form1 : Form
     {
-
         private static Form1 instance;
-        private TcpClient serverClient;
-
-        public TextBox MessageTextBox { get; set; }
-        public TextBox UsernameTextBox { get; set; }
-        public Button ConnectButton { get; set; }
-        public TextBox BidTextBox { get; set; }
+        private Client _client;
 
         public Form1()
         {
             InitializeComponent();
-            this.MessageTextBox = messageTextBox;
-            this.UsernameTextBox = usernameLabel;
-            this.ConnectButton = connectButton;
-            this.BidTextBox = bidTextBox;
-
         }
 
         public static Form1 GetInstance()
         {
-            if (instance == null)
-                instance = new Form1();
+            instance = instance ?? new Form1();
             return instance;
         }
 
-        static void ClientThread(object obj)
-        {
-            Client client = obj as Client;
-            client.Receive();
-        }
-
-        public void SendClient(TcpClient client)
-        {
-            serverClient = client;
-        }
 
         public void UpdateTextBox(string message)
         {
-            messageTextBox.Invoke((Action)(() =>
-            {
-                messageTextBox.AppendText("\r\n" + message + "\r\n");
-            }));
+            instance.messageTextBox.Invoke((Action)(() => { messageTextBox.AppendText("\r\n" + message + "\r\n"); }));
         }
 
         private void UsernameLabel_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            string username = UsernameTextBox.Text;
-            ConnectButton.Enabled = false;
-            Thread thread = new Thread(ClientThread);
-            thread.Start(new Client(username));
+            instance.connectButton.Enabled = false;
+            _client = new Client(instance.usernameLabel.Text);
 
-            messageTextBox.AppendText(username + " is verbonden!");
+            instance.messageTextBox.AppendText(_client.Username + " is verbonden!");
         }
 
-        private void bidButton_Click(object sender, EventArgs e)
+        private void bidButton_ClickAsync(object sender, EventArgs e)
         {
             if (connectButton.Enabled == false)
             {
-
+                string amountS = instance.bidTextBox.Text;
+                amountS = System.Text.RegularExpressions.Regex.Replace(amountS, "[^0-9.]", "");
+                int amountI = Convert.ToInt32(amountS);
+                Bid bid = new Bid(_client.Username, _client.CurrentCar.CarID, amountI, DateTime.Now);
+                MessageUtil.SendMessage(new BidMessage(bid), _client.Socket.GetStream());
             }
             else
             {

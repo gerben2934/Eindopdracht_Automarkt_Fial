@@ -6,6 +6,8 @@ namespace SharedData
 {
     public class Bid
     {
+        public string Username { get; private set; }
+        public int CarId { get; private set; }
         public int Amount { get; set; }
         public DateTime Time { get; set; }
 
@@ -15,15 +17,17 @@ namespace SharedData
             this.Time = DateTime.Now;
         }
 
-        public Bid(int amount, DateTime time)
+        public Bid(string username, int carId, int amount, DateTime time)
         {
+            this.Username = username;
+            this.CarId = carId;
             this.Amount = amount;
             this.Time = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return $"amount: {Amount}\n, time: {Time}";
+            return $"username: {Username}\n carId: {CarId}\n amount: {Amount}\n, time: {Time}";
         }
     }
 }

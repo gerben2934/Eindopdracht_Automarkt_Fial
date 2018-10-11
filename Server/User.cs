@@ -10,22 +10,55 @@ using SharedData.Packets;
 
 namespace Server
 {
-    class User
+    public class User
     {
-        public TcpClient client { get; set; }
+        public TcpClient Client { get; set; }
+        public bool Running { get; set; }
 
         public User(TcpClient client)
         {
-            this.client = client;
-            ReadAsync();
+            Client = client;
+            StartBackgroundReceiver();
         }
-    
-        private void ReadAsync()
+
+        private void StartBackgroundReceiver()
         {
-            Task.Factory.StartNew(() =>
+            Running = true;
+            Task.Factory.StartNew(async () =>
             {
-                MessageUtil.SendMessage(new CarMessage(Server.Cars[0]), client.GetStream());
+                while (Running)
+                {
+                    dynamic msg = await MessageUtil.ReadMessage(Client);
+                    IPacket message = JsonDecoder.Decode(msg);
+                    switch (message.Type)
+                    {
+                        case PacketType.BidMessage:
+                            HandleBidMessage((BidMessage)message);
+                            break;
+                        case PacketType.CarMessage:
+                            HandleCarMessage((CarMessage)message);
+                            break;
+                        case PacketType.OkMessage:
+                            HandleOkMessage((OkMessage)message);
+                            break;
+                    }
+                }
             });
+        }
+
+        private void HandleBidMessage(BidMessage message)
+        {
+            Console.WriteLine("Received BidMessage");
+        }
+
+        private void HandleCarMessage(CarMessage message)
+        {
+            Console.WriteLine("Received CarMessage");
+        }
+
+        private void HandleOkMessage(OkMessage message)
+        {
+            Console.WriteLine("Received OkMessage");
         }
     }
 }

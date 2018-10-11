@@ -1,74 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Presentation;
 using SharedData;
 using SharedData.Packets;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace ClientGUI
 {
-    class Client
+    public class Client
     {
-        private static byte[] buffer = new byte[1024];
-        private static string totalBuffer = "";
-        public static string Username { get; private set; }
-        public static TcpClient Socket { get; private set; }
-        private const ushort PORT = 10000;
+        public string Username { get; }
+        public TcpClient Socket { get; }
+        public Car CurrentCar { get; set; }
+        public bool Running { get; set; }
+
+        private const ushort Port = 10000;
 
         public Client(string username)
         {
-            Socket = new TcpClient("localhost", PORT);
-            //Socket.Connect("localhost", PORT);
+            Socket = new TcpClient("localhost", Port);
             Username = username;
-
-            //client.GetStream().BeginRead(buffer, 0, 1024, new AsyncCallback(OnRead), null);
-            //Receive();
+            StartBackgroundReceiver();
         }
 
-        public void Receive()
+        private void StartBackgroundReceiver()
         {
+            Running = true;
             Task.Factory.StartNew(async () =>
             {
-                while (true)
+                while (Running)
                 {
-                    dynamic data = await MessageUtil.ReadMessage(Socket);
-                    dynamic handler = HandlePacket(data);
-                    //HandlePacket(data);
-                    Form1.GetInstance().UpdateTextBox(handler.ToString());
-                    //Debug.WriteLine(MessageUtil.ReadMessage(Socket));
+                    dynamic msg = await MessageUtil.ReadMessage(Socket);
+                    IPacket message = JsonDecoder.Decode(msg);
+                    switch (message.Type)
+                    {
+                        case PacketType.BidMessage:
+                            HandleBidMessage((BidMessage)message);
+                            break;
+                        case PacketType.CarMessage:
+                            HandleCarMessage((CarMessage)message);
+                            break;
+                        case PacketType.OkMessage:
+                            HandleOkMessage((OkMessage)message);
+                            break;
+                    }
                 }
             });
         }
 
-        private dynamic HandlePacket(dynamic jsonData)
+        private void HandleBidMessage(BidMessage message)
         {
-            string packetType = jsonData.packetType;
-            switch (packetType)
-            {
-                case nameof(BidMessage):
-                    BidMessage bm = SharedData.Packets.BidMessage.ToClass(jsonData);
-                    //ClientUpdate(bm);
-                    return bm.Bid;
-                    break;
-                case nameof(CarMessage):
-                    CarMessage cm = SharedData.Packets.CarMessage.ToClass(jsonData);
-                    //ClientUpdate(cm);
-                    return cm.Car;
-                    break;
-                case nameof(OkMessage):
-                    return jsonData;
-                    break;
+        }
 
-            }
+        private void HandleCarMessage(CarMessage message)
+        {
+            CurrentCar = message.Car;
+            Form1.GetInstance().UpdateTextBox(CurrentCar.ToString());
+        }
 
-            return null;
+        private void HandleOkMessage(OkMessage message)
+        {
+            Console.WriteLine("Ok");
         }
     }
 }
+//                    

@@ -30,7 +30,7 @@ namespace Server
 
         public void StartAuction(int auctionTime)
         {
-            Car.bids.Clear();
+            Car.Bids.Clear();
             AuctionTime = auctionTime;
             Running = true;
             StartTime = DateTime.Now;
@@ -49,7 +49,7 @@ namespace Server
         public string BidsToString(Car car)
         {
             string Bids = $"This are all the bids on Car: {car.Brand}, with ID: {car.CarID}:";
-            foreach(Bid b in car.bids)
+            foreach(Bid b in car.Bids)
             {
                 Bids += $"\n\rUser: blablabla is bidding: {b.Amount} on: {b.Time}.";
             }

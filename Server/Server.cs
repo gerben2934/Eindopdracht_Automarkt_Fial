@@ -13,81 +13,81 @@ namespace Server
 {
     public class Server
     {
-        public TcpClient Client123;
-        public static List<Car> Cars { get; set; }
-        static List<User> Users = new List<User>();
-        public static List<TcpClient> Clients { get; set; }
+        public List<Car> Cars { get; set; }
+        public List<User> Users { get; }
+        public List<TcpClient> Clients { get; set; }
 
         private const ushort PORT = 10000;
 
-        private static TcpListener server;
+        private readonly TcpListener _server;
 
         public static Car ToyotaYaris;
 
 
         public static void Main(string[] args)
         {
-            server = new TcpListener(PORT);
-            Cars = new List<Car>();
+            new Server();
+        }
 
-            server.Start();
-            server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
+        public Server()
+        {
+            _server = TcpListener.Create(PORT);
+            Cars = new List<Car>();
+            Users = new List<User>();
+            FillCars();
+            _server.Start();
+            _server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
 
             Console.ReadKey();
         }
 
-        private static void OnConnect(IAsyncResult ar)
+        private void OnConnect(IAsyncResult ar)
         {
-            TcpClient client = server.EndAcceptTcpClient(ar);
+            TcpClient client = _server.EndAcceptTcpClient(ar);
             Users.Add(new User(client));
-            FillCars();
-
-            Broadcast();
+            MessageUtil.SendMessage(new CarMessage(Cars[0]), client.GetStream());
+            _server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
+            //Broadcast();
 
             //MessageUtil.sendMessage(new OkMessage("Het werkt"), client.GetStream());
             //MessageUtil.SendMessage(new CarMessage(ToyotaYaris), client.GetStream());
-            server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
         }
 
-        public static void Broadcast()
+        public void BroadcastAsync(IPacket packet)
         {
+            Console.WriteLine("Broadcast");
             foreach (User user in Users)
             {
-                Console.WriteLine("werkt dit?");
+                Console.WriteLine("Broadcast");
                 //MessageUtil.SendMessage(new CarMessage(ToyotaYaris), user.client.GetStream());
-                MessageUtil.SendMessage(new OkMessage("test"), user.client.GetStream() );
+                MessageUtil.SendMessage(packet, user.Client.GetStream());
             }
         }
-
-        private void HandlePacket(dynamic jsonData, TcpClient client)
+    
+        private void NewBid(Bid bid) //bool? voor feedback gebruiker
         {
-            string packetType = jsonData.packetType;
-            switch(packetType)
+            foreach (Car c in Cars)
             {
-                case nameof(BidMessage):
-                    BidMessage bm = SharedData.Packets.BidMessage.ToClass(jsonData);
-                    ClientUpdate(bm);
-                    break;
-                case nameof(CarMessage):
-                    CarMessage cm = SharedData.Packets.CarMessage.ToClass(jsonData);
-                    ClientUpdate(cm);
-                    break;
+                if (c.CarID == bid.CarId)
+                {
+                    c.Bids.Add(bid);
+                    Console.WriteLine("Bieding toegevoegd!");
+                    BroadcastAsync(new CarMessage(c));
+                    Console.WriteLine("Auto gebroadcast!");
+                    Console.WriteLine("Aantal biedingen: " + c.Bids.Count());
+                }
             }
         }
 
-        private void NewBid(TcpClient client, BidMessage bid) //bool? voor feedback gebruiker
-        {
-            
-        }
-
-        private void ClientUpdate(dynamic update)
+        private static void ClientUpdate(dynamic update)
         {
 
         }
 
-        public static void FillCars()
+        public void FillCars()
         {
-            ToyotaYaris = new Car(001, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
+            List<Bid> bids = new List<Bid>();
+            ToyotaYaris = new Car(001, bids, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
             Cars.Add(ToyotaYaris);
         }
     }

@@ -18,6 +18,7 @@ namespace SharedData.Packets
     
     class OkMessage : IPacket
     {
+        public PacketType Type => PacketType.OkMessage;
         public string Message { get; set; }
 
         public OkMessage(string message)

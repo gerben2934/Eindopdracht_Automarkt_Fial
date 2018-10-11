@@ -15,7 +15,7 @@ namespace SharedData
 
         public static byte[] _totalBuffer = new byte[0];
 
-        public static void SendMessage(IPacket message, NetworkStream stream)
+        public static async void SendMessage(IPacket message, NetworkStream stream)
         {
             Console.WriteLine(message.ToJson());
             byte[] lengthPrefix = BitConverter.GetBytes(message.ToJson().Length);
@@ -24,38 +24,36 @@ namespace SharedData
             lengthPrefix.CopyTo(buffer, 0);
             data.CopyTo(buffer, lengthPrefix.Length);
 
-            stream.WriteAsync(buffer, 0, buffer.Length);
+            await stream.WriteAsync(buffer, 0, buffer.Length);
         }
 
         public static async Task<dynamic> ReadMessage(TcpClient client)
         {
             NetworkStream networkStream = client.GetStream();
             byte[] sizeInfo = new byte[4];
-            
+
             int totalRead = 0, read = 0;
             do
             {
                 read = networkStream.Read(sizeInfo, totalRead, sizeInfo.Length - totalRead);
                 totalRead += read;
             } while (totalRead < sizeInfo.Length && read > 0);
-            
+
             int messageSize = BitConverter.ToInt32(sizeInfo, 0);
-            
+
             byte[] data = new byte[messageSize];
-            
+
             totalRead = 0;
-            
+
             do
             {
-                totalRead += read = networkStream.Read(data, totalRead, data.Length - totalRead);
+                read = await networkStream.ReadAsync(data, totalRead, data.Length - totalRead);
+                totalRead += read;
+                //totalRead += read = networkStream.Read(data, totalRead, data.Length - totalRead);
             } while (totalRead < messageSize && read > 0);
-            
+
             dynamic result = JsonConvert.DeserializeObject<dynamic>(Encoding.UTF8.GetString(data, 0, totalRead));
             return result;
-
         }
-
-
-
     }
 }
