@@ -67,6 +67,7 @@ namespace Presentation
             this.bidButton.Size = new System.Drawing.Size(101, 34);
             this.bidButton.TabIndex = 2;
             this.bidButton.Text = "Send Bid";
+            this.bidButton.Enabled = false;
             this.bidButton.UseVisualStyleBackColor = true;
             this.bidButton.Click += new System.EventHandler(this.bidButton_ClickAsync);
             // 

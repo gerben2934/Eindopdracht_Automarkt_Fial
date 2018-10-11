@@ -63,21 +63,6 @@ namespace Server
                 MessageUtil.SendMessage(packet, user.Client.GetStream());
             }
         }
-    
-        private void NewBid(Bid bid) //bool? voor feedback gebruiker
-        {
-            foreach (Car c in Cars)
-            {
-                if (c.CarID == bid.CarId)
-                {
-                    c.Bids.Add(bid);
-                    Console.WriteLine("Bieding toegevoegd!");
-                    BroadcastAsync(new CarMessage(c));
-                    Console.WriteLine("Auto gebroadcast!");
-                    Console.WriteLine("Aantal biedingen: " + c.Bids.Count());
-                }
-            }
-        }
 
         private static void ClientUpdate(dynamic update)
         {
@@ -87,7 +72,9 @@ namespace Server
         public void FillCars()
         {
             List<Bid> bids = new List<Bid>();
+            bids.Add(new Bid("Ralph", 001, 1000, DateTime.Now));
             ToyotaYaris = new Car(001, bids, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
+            ToyotaYaris.ToString();
             Cars.Add(ToyotaYaris);
         }
     }

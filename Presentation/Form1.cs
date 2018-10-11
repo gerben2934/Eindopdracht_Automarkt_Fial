@@ -48,6 +48,7 @@ namespace Presentation
             _client = new Client(instance.usernameLabel.Text);
 
             instance.messageTextBox.AppendText(_client.Username + " is verbonden!");
+            instance.bidButton.Enabled = true;
         }
 
         private void bidButton_ClickAsync(object sender, EventArgs e)
@@ -56,6 +57,11 @@ namespace Presentation
             {
                 string amountS = instance.bidTextBox.Text;
                 amountS = System.Text.RegularExpressions.Regex.Replace(amountS, "[^0-9.]", "");
+                if(amountS.Length == 0)
+                {
+                    MessageBox.Show(null, "Bedrag invullen!", "Vul een bedrag in!");
+                    return;
+                }
                 int amountI = Convert.ToInt32(amountS);
                 Bid bid = new Bid(_client.Username, _client.CurrentCar.CarID, amountI, DateTime.Now);
                 MessageUtil.SendMessage(new BidMessage(bid), _client.Socket.GetStream());
