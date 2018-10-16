@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>547e97d8-d7f2-4fd1-8b43-6575a0badbe1</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SharedData</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Bid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Car.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonDecoder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets\BidMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets\CarMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets\IPacket.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets\OkMessage.cs" />
+  </ItemGroup>
+</Project>
