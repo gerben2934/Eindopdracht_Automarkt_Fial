@@ -68,5 +68,4 @@ namespace ClientGUI
             Console.WriteLine("CLIENT: received OK message");
         }
     }
-}
-//                    
+}                 

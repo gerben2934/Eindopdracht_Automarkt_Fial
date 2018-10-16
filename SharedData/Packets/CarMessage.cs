@@ -14,7 +14,6 @@ namespace SharedData.Packets
             "packetType" : "CarMessage",
             "object" : {
                 "carId" : "12345",
-                "bids" : 
                 "carBrand" : "Toyota",
                 "carModel" : "Yaris",
                 "carDescription" : "Toyota Yaris 1.4",

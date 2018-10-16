@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Server
 {
@@ -17,6 +18,9 @@ namespace Server
         public static List<User> Users { get; set; }
         public List<TcpClient> Clients { get; set; }
         public static List<Bid> Bids { get; set; }
+        public Auction Auction1 { get; set; }
+        private readonly System.Timers.Timer sessionTimer;
+
 
         private const ushort PORT = 10000;
 
@@ -39,8 +43,31 @@ namespace Server
             FillCars();
             _server.Start();
             _server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
+            sessionTimer = new System.Timers.Timer();
+            sessionTimer.Interval = 1000;
+            sessionTimer.AutoReset = true;
+            sessionTimer.Elapsed += SessionProgress;
+            sessionTimer.Start();
+            Console.WriteLine("Auction started");
+
+            Auction1 = new Auction(Users, Cars[0], Bids);
+            Auction1.StartAuction(10);
 
             Console.ReadKey();
+        }
+
+        private void SessionProgress(object sender, ElapsedEventArgs e)
+        {
+            if (!Auction1.Running) return;
+
+            TimeSpan duration = DateTime.Now - Auction1.StartTime;
+            if (duration.TotalSeconds >= Auction1.AuctionTime)
+            {
+                Console.WriteLine("Auction ended");
+                Auction1.StopSession();
+                //Call methods
+                Auction1.SaveAuction();
+            }
         }
 
         private void OnConnect(IAsyncResult ar)
@@ -74,8 +101,8 @@ namespace Server
         public void FillCars()
         {
             List<Bid> bids = new List<Bid>();
-            bids.Add(new Bid("Ralph", 001, 1000, DateTime.Now));
-            ToyotaYaris = new Car(001, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
+            bids.Add(new Bid("Ralph", 1, 1000, DateTime.Now));
+            ToyotaYaris = new Car(1, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
             ToyotaYaris.ToString();
             Cars.Add(ToyotaYaris);
         }
