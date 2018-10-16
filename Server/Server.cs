@@ -75,7 +75,7 @@ namespace Server
         {
             List<Bid> bids = new List<Bid>();
             bids.Add(new Bid("Ralph", 001, 1000, DateTime.Now));
-            ToyotaYaris = new Car(001, bids, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
+            ToyotaYaris = new Car(001, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
             ToyotaYaris.ToString();
             Cars.Add(ToyotaYaris);
         }

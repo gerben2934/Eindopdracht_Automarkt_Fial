@@ -30,7 +30,7 @@ namespace Server
 
         public void StartAuction(int auctionTime)
         {
-            Car.Bids.Clear();
+            //Car.Bids.Clear();
             AuctionTime = auctionTime;
             Running = true;
             StartTime = DateTime.Now;
@@ -46,23 +46,23 @@ namespace Server
             return ClientList;
         }
 
-        public string BidsToString(Car car)
-        {
-            string Bids = $"This are all the bids on Car: {car.Brand}, with ID: {car.CarID}:";
-            foreach(Bid b in car.Bids)
-            {
-                Bids += $"\n\rUser: blablabla is bidding: {b.Amount} on: {b.Time}.";
-            }
-            Bids += $"\n\rSuccessfull Bidder: ";
-            return Bids;
-        }
+//        public string BidsToString(Car car)
+//        {
+////            string Bids = $"This are all the bids on Car: {car.Brand}, with ID: {car.CarID}:";
+////            foreach(Bid b in car.Bids)
+////            {
+////                Bids += $"\n\rUser: blablabla is bidding: {b.Amount} on: {b.Time}.";
+////            }
+////            Bids += $"\n\rSuccessfull Bidder: ";
+////            return Bids;
+//        }
 
         public string ToString(List<TcpClient> clients, Car car)
         {
             string Auction = "";
             Auction += $"Auction number: {AuctionID}, AuctionTime: {AuctionTime}, Running: {Running}\n\r";
             Auction += $"Clients: {clients.Count()}\n\r\n\r";
-            Auction += BidsToString(car);
+            //Auction += BidsToString(car);
 
             return Auction;
         }

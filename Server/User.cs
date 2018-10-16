@@ -60,7 +60,7 @@ namespace Server
                         Server.Bids.Add(b);
                         Server.BroadcastAsync(new BidMessage(b));
                         Console.WriteLine("Auto gebroadcast!");
-                        Console.WriteLine("Aantal biedingen: " + CurrentCar.Bids.Count());
+                    
                     }
             }
         }

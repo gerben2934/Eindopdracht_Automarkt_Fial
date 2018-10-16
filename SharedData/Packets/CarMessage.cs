@@ -40,7 +40,6 @@ namespace SharedData.Packets
         public static IPacket ToClass(dynamic json)
         {
             int CarID = (int)json.data.carId;
-            List<Bid> Bids = (List<Bid>)json.data.bid;
             string Brand = (string)json.data.carBrand;
             string Model = (string)json.data.carModel;
             string Description = (string)json.data.carDescription;
@@ -53,7 +52,7 @@ namespace SharedData.Packets
             bool successFt = Enum.TryParse((string)json.data.carFuelType, true, out ft);
             if (successFt && successFt)
             {
-                Car car = new Car(CarID, Bids, Brand, Model, Description, Mileage, Color, Year, st, ft);
+                Car car = new Car(CarID, Brand, Model, Description, Mileage, Color, Year, st, ft);
                 return new CarMessage(car);
             }
             else
@@ -73,7 +72,6 @@ namespace SharedData.Packets
                 data = new
                 {
                     carId = Car.CarID,
-                    bids = Car.Bids,
                     carBrand = Car.Brand,
                     carModel = Car.Model,
                     carDescription = Car.Description,
