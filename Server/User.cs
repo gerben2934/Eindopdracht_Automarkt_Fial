@@ -54,7 +54,6 @@ namespace Server
                 {
                     if (c.CarID == b.CarId)
                     {
-                        c.Bids.Add(b);
                         Car CurrentCar = c;
                         Console.WriteLine("Bieding toegevoegd!");
                         //Server.BroadcastAsync(new CarMessage(CurrentCar));
