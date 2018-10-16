@@ -16,6 +16,7 @@ namespace Server
         public static List<Car> Cars { get; set; }
         public static List<User> Users { get; set; }
         public List<TcpClient> Clients { get; set; }
+        public static List<Bid> Bids { get; set; }
 
         private const ushort PORT = 10000;
 
@@ -34,6 +35,7 @@ namespace Server
             _server = TcpListener.Create(PORT);
             Cars = new List<Car>();
             Users = new List<User>();
+            Bids = new List<Bid>();
             FillCars();
             _server.Start();
             _server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);

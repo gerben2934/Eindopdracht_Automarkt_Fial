@@ -57,7 +57,9 @@ namespace Server
                         c.Bids.Add(b);
                         Car CurrentCar = c;
                         Console.WriteLine("Bieding toegevoegd!");
-                        Server.BroadcastAsync(new CarMessage(CurrentCar));
+                        //Server.BroadcastAsync(new CarMessage(CurrentCar));
+                        Server.Bids.Add(b);
+                        Server.BroadcastAsync(new BidMessage(b));
                         Console.WriteLine("Auto gebroadcast!");
                         Console.WriteLine("Aantal biedingen: " + CurrentCar.Bids.Count());
                     }

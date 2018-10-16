@@ -52,7 +52,7 @@ namespace ClientGUI
         {
             Console.WriteLine("CLIENT: received bid message");
             Bid b = message.Bid;
-            
+            Form1.GetInstance().UpdateTextBox(b.ToString());
         }
 
         private void HandleCarMessage(CarMessage message)

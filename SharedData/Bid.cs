@@ -27,7 +27,7 @@ namespace SharedData
 
         public override string ToString()
         {
-            return $"username: {Username}\n carId: {CarId}\n amount: {Amount}\n, time: {Time.ToString("yyyy-MM-dd HH:mm:ss")} \r\n";
+            return $"Bieding van: \r\n username: {Username}\r\n carId: {CarId}\r\n amount: {Amount}\r\n, time: {Time.ToString("yyyy-MM-dd HH:mm:ss")} \r\n";
         }
     }
 }
