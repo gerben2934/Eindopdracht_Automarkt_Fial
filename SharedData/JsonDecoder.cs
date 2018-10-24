@@ -16,6 +16,8 @@ namespace SharedData
                 return DecodeCarMessage(json);
             if (type == PacketType.BidMessage)
                 return DecodeBidMessage(json);
+            if (type == PacketType.TimeMessage)
+                return DecodeTimeMessage(json);
             return null;
         }
 
@@ -33,6 +35,11 @@ namespace SharedData
         private static OkMessage DecodeOkMessage(dynamic json)
         {
             return OkMessage.ToClass(json);
+        }
+
+        private static TimeMessage DecodeTimeMessage(dynamic json)
+        {
+            return TimeMessage.ToClass(json);
         }
     }
 }

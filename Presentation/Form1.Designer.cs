@@ -38,6 +38,8 @@ namespace Presentation
             this.usernameLabel = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBoxTime = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // messageTextBox
@@ -116,11 +118,31 @@ namespace Presentation
             this.label3.TabIndex = 7;
             this.label3.Text = "Vul bedrag in om te bieden";
             // 
+            // textBoxTime
+            // 
+            this.textBoxTime.Location = new System.Drawing.Point(755, 651);
+            this.textBoxTime.Multiline = true;
+            this.textBoxTime.Name = "textBoxTime";
+            this.textBoxTime.Size = new System.Drawing.Size(213, 37);
+            this.textBoxTime.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(630, 651);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 37);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Time:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 836);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.usernameLabel);
@@ -146,6 +168,8 @@ namespace Presentation
         private System.Windows.Forms.TextBox usernameLabel;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Label label3;
+        private TextBox textBoxTime;
+        private Label label4;
     }
 }
 

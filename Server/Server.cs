@@ -20,6 +20,7 @@ namespace Server
         public static List<Bid> Bids { get; set; }
         public Auction Auction1 { get; set; }
         private readonly System.Timers.Timer sessionTimer;
+        private bool StartAuction;
 
 
         private const ushort PORT = 10000;
@@ -51,7 +52,8 @@ namespace Server
             Console.WriteLine("Auction started");
 
             Auction1 = new Auction(Users, Cars[0], Bids);
-            Auction1.StartAuction(10);
+            StartAuction = true;
+            //Auction1.StartAuction(10);
 
             Console.ReadKey();
         }
@@ -60,7 +62,10 @@ namespace Server
         {
             if (!Auction1.Running) return;
 
-            TimeSpan duration = DateTime.Now - Auction1.StartTime;
+            TimeSpan duration = DateTime.UtcNow - Auction1.StartTime;
+
+            //BroadcastAsync(new TimeMessage(duration.ToString()));
+
             if (duration.TotalSeconds >= Auction1.AuctionTime)
             {
                 Console.WriteLine("Auction ended");
@@ -74,6 +79,13 @@ namespace Server
         {
             TcpClient client = _server.EndAcceptTcpClient(ar);
             Users.Add(new User(client));
+
+            if (Users.Count >= 2 && StartAuction == true)
+            {
+                Auction1.StartAuction(60);
+                StartAuction = false;
+            }
+
             MessageUtil.SendMessage(new CarMessage(Cars[0]), client.GetStream());
             _server.BeginAcceptTcpClient(new AsyncCallback(OnConnect), null);
             //Broadcast();

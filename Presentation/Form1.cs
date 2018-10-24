@@ -38,6 +38,16 @@ namespace Presentation
             instance.messageTextBox.Invoke((Action)(() => { messageTextBox.AppendText("\r\n" + message + "\r\n"); }));
         }
 
+        public void UpdateTimeBox(string message)
+        {
+            instance.messageTextBox.Invoke((Action)(() =>
+            {
+                textBoxTime.Text = message;
+                //messageTextBox.AppendText("\r\n" + message + "\r\n");
+            }));
+
+        }
+
         private void UsernameLabel_TextChanged(object sender, EventArgs e)
         {
         }

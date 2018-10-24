@@ -15,6 +15,7 @@ namespace SharedData
     {
         OkMessage,
         BidMessage,
-        CarMessage
+        CarMessage,
+        TimeMessage
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Presentation;
 using SharedData;
 using SharedData.Packets;
@@ -43,6 +44,9 @@ namespace ClientGUI
                         case PacketType.OkMessage:
                             HandleOkMessage((OkMessage)message);
                             break;
+                        case PacketType.TimeMessage:
+                            HandleTimeMessage((TimeMessage)message);
+                            break;
                     }
                 }
             });
@@ -55,6 +59,12 @@ namespace ClientGUI
             Form1.GetInstance().UpdateTextBox(b.ToString());
         }
 
+        private void HandleTimeMessage(TimeMessage message)
+        {
+            Debug.WriteLine(message);
+            Form1.GetInstance().UpdateTimeBox(message.ToString());
+        }
+
         private void HandleCarMessage(CarMessage message)
         {
             Console.WriteLine("CLIENT: received car Message");
@@ -65,6 +75,7 @@ namespace ClientGUI
 
         private void HandleOkMessage(OkMessage message)
         {
+            Console.WriteLine(message);
             Console.WriteLine("CLIENT: received OK message");
         }
     }
