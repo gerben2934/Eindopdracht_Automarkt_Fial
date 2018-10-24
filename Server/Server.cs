@@ -72,6 +72,9 @@ namespace Server
                 Auction1.StopSession();
                 //Call methods
                 Auction1.SaveAuction();
+                Bid SuccesfullBidder = Auction1.MaxBid;
+                Console.WriteLine("Succesfullbidder: " + SuccesfullBidder);
+                BroadcastAsync(new SuccesfullBidder(SuccesfullBidder));
             }
         }
 

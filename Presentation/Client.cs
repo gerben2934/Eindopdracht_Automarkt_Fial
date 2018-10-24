@@ -15,11 +15,12 @@ namespace ClientGUI
         public Car CurrentCar { get; set; }
         public bool Running { get; set; }
 
-        private const ushort Port = 10000;
+        private const string IP = "127.0.0.1";
+        private const ushort PORT = 10000;
 
         public Client(string username)
         {
-            Socket = new TcpClient("localhost", Port);
+            Socket = new TcpClient(IP, PORT);
             Username = username;
             StartBackgroundReceiver();
         }
@@ -44,6 +45,9 @@ namespace ClientGUI
                         case PacketType.OkMessage:
                             HandleOkMessage((OkMessage)message);
                             break;
+                        case PacketType.SuccesfullBidder:
+                            HandleSuccesfullBidderMessage((SuccesfullBidder)message);
+                            break;
                         case PacketType.TimeMessage:
                             HandleTimeMessage((TimeMessage)message);
                             break;
@@ -52,11 +56,18 @@ namespace ClientGUI
             });
         }
 
+        private void HandleSuccesfullBidderMessage(SuccesfullBidder message)
+        {
+            Console.WriteLine("CLIENT: received succesfullbidder message");
+            Bid b = message.Bid;
+            AuctionForm.GetInstance().UpdateTextBox(b.ToString());
+        }
+
         private void HandleBidMessage(BidMessage message)
         {
             Console.WriteLine("CLIENT: received bid message");
             Bid b = message.Bid;
-            Form1.GetInstance().UpdateTextBox(b.ToString());
+            AuctionForm.GetInstance().UpdateTextBox(b.ToString());
         }
 
         private void HandleTimeMessage(TimeMessage message)
@@ -70,7 +81,7 @@ namespace ClientGUI
             Console.WriteLine("CLIENT: received car Message");
             CurrentCar = message.Car;
             Console.WriteLine("Currentcar: " + CurrentCar);
-            Form1.GetInstance().UpdateTextBox(CurrentCar.ToString());
+            AuctionForm.GetInstance().UpdateTextBox(CurrentCar.ToString());
         }
 
         private void HandleOkMessage(OkMessage message)

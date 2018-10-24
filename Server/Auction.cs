@@ -22,7 +22,6 @@ namespace Server
         public DateTime StartTime { get; private set; }
         public bool Running { get; private set; }
 
-
         public Auction(List<User> clients, Car car, List<Bid> bids)
         {
             Clients = clients;
@@ -36,7 +35,7 @@ namespace Server
             Bids.Clear();
             AuctionTime = auctionTime;
             Running = true;
-            StartTime = DateTime.Now;
+            StartTime = DateTime.UtcNow;
         }
 
         public void StopSession() => Running = false;
@@ -77,7 +76,6 @@ namespace Server
             Auctionstring += BidsToString(car);
 
             Console.WriteLine(Auctionstring);
-
             return Auctionstring;
         }
 
