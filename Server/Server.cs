@@ -64,7 +64,7 @@ namespace Server
 
             TimeSpan duration = DateTime.UtcNow - Auction1.StartTime;
 
-            //BroadcastAsync(new TimeMessage(duration.ToString()));
+            BroadcastAsync(new TimeMessage(duration.ToString()));
 
             if (duration.TotalSeconds >= Auction1.AuctionTime)
             {
@@ -72,9 +72,10 @@ namespace Server
                 Auction1.StopSession();
                 //Call methods
                 Auction1.SaveAuction();
-                Bid SuccesfullBidder = Auction1.MaxBid;
-                Console.WriteLine("Succesfullbidder: " + SuccesfullBidder);
-                BroadcastAsync(new SuccesfullBidder(SuccesfullBidder));
+                Bid SuccesfullBid = Auction1.MaxBid;
+                Console.WriteLine("Succesfullbidder: " + SuccesfullBid);
+                BroadcastAsync(new SuccesfullBidder(SuccesfullBid));
+        
             }
         }
 

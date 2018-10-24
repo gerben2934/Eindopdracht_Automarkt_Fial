@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharedData.Packets
 {
-    class SuccesfullBidder : IPacket
+    public class SuccesfullBidder : IPacket
     {
         /**
         {
