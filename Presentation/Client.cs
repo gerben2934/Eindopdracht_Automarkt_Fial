@@ -73,7 +73,7 @@ namespace ClientGUI
         private void HandleTimeMessage(TimeMessage message)
         {
             Debug.WriteLine(message);
-            AuctionForm.GetInstance().UpdateTimeBox(message.ToString());
+            AuctionForm.GetInstance().UpdateTimeBox(message.Time);
         }
 
         private void HandleCarMessage(CarMessage message)

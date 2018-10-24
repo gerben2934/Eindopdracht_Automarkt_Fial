@@ -126,15 +126,14 @@ namespace Presentation
             this.userCount.Location = new System.Drawing.Point(86, 192);
             this.userCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userCount.Name = "userCount";
-            this.userCount.Size = new System.Drawing.Size(128, 25);
+            this.userCount.Size = new System.Drawing.Size(0, 25);
             this.userCount.TabIndex = 8;
-            this.userCount.Text = "Deelnemers: ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(87, 230);
+            this.label4.Location = new System.Drawing.Point(86, 192);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 25);
             this.label4.TabIndex = 9;
@@ -142,9 +141,9 @@ namespace Presentation
             // 
             // textBoxTimeMessage
             // 
-            this.textBoxTimeMessage.Location = new System.Drawing.Point(494, 229);
+            this.textBoxTimeMessage.Location = new System.Drawing.Point(494, 193);
             this.textBoxTimeMessage.Name = "textBoxTimeMessage";
-            this.textBoxTimeMessage.Size = new System.Drawing.Size(284, 26);
+            this.textBoxTimeMessage.Size = new System.Drawing.Size(163, 26);
             this.textBoxTimeMessage.TabIndex = 10;
             // 
             // AuctionForm

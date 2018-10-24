@@ -17,7 +17,7 @@ namespace SharedData.Packets
 
         public static IPacket ToClass(dynamic json)
         {
-            string s = (string)json.data.id;
+            string s = (string)json.data.time;
             return new TimeMessage(s);
         }
 
