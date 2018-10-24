@@ -46,22 +46,44 @@ namespace Server
             });
         }
 
+        //        private void HandleBidMessage(BidMessage message)
+        //        {
+        //            Console.WriteLine("USER Received BidMessage");
+        //            Bid b = message.Bid;
+        //                foreach (Car c in Server.Cars)
+        //                {
+        //                    if (c.CarID == b.CarId)
+        //                    {
+        //                        Car CurrentCar = c;
+        //                        Console.WriteLine("Bieding toegevoegd!");
+        //                        //Server.BroadcastAsync(new CarMessage(CurrentCar));
+        //                        Server.Bids.Add(b);
+        //                        Server.BroadcastAsync(new BidMessage(b));
+        //                        Console.WriteLine("Auto gebroadcast!");
+        //                    
+        //                    }
+        //            }
+        //        }
+
         private void HandleBidMessage(BidMessage message)
         {
-            Console.WriteLine("USER Received BidMessage");
             Bid b = message.Bid;
-                foreach (Car c in Server.Cars)
+
+
+            int MaxBid = 0;
+            foreach (Bid bb in Server.Bids)
+            {
+                if (bb.Amount > MaxBid)
                 {
-                    if (c.CarID == b.CarId)
-                    {
-                        Car CurrentCar = c;
-                        Console.WriteLine("Bieding toegevoegd!");
-                        //Server.BroadcastAsync(new CarMessage(CurrentCar));
-                        Server.Bids.Add(b);
-                        Server.BroadcastAsync(new BidMessage(b));
-                        Console.WriteLine("Auto gebroadcast!");
-                    
-                    }
+                    MaxBid = bb.Amount;
+                }
+            }
+
+            if (b.Amount > MaxBid)
+            {
+                Server.Bids.Add(b);
+                Server.BroadcastAsync(new BidMessage(b));
+                Console.WriteLine("Auto gebroadcast!");
             }
         }
 

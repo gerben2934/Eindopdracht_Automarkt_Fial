@@ -9,7 +9,7 @@ namespace SharedData.Packets
     {
         /**
         {
-            "packetType" : "BidMessage",
+            "packetType" : "Succes",
             "object" : {
                 "username" : "string name",
                 "carId" : "int id",
@@ -19,7 +19,7 @@ namespace SharedData.Packets
         }
         **/
 
-        public PacketType Type => PacketType.BidMessage;
+        public PacketType Type => PacketType.SuccesfullBidder;
         public Bid Bid { get; set; }
 
         public SuccesfullBidder(Bid bid)
@@ -34,12 +34,12 @@ namespace SharedData.Packets
             int amount = (int)json.data.amount;
             DateTime time = (DateTime)json.data.time;
             Bid b = new Bid(username, carId, amount, time);
-            return new BidMessage(b);
+            return new SuccesfullBidder(b);
         }
 
         IPacket IPacket.ToClass(dynamic json)
         {
-            return BidMessage.ToClass(json);
+            return SuccesfullBidder.ToClass(json);
         }
 
         public dynamic ToJson()

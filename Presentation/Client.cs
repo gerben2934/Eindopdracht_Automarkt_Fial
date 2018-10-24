@@ -60,7 +60,7 @@ namespace ClientGUI
         {
             Console.WriteLine("CLIENT: received succesfullbidder message");
             Bid b = message.Bid;
-            AuctionForm.GetInstance().UpdateTextBox(b.ToString());
+            AuctionForm.GetInstance().UpdateTextBox(b.ToStringSucces());
         }
 
         private void HandleBidMessage(BidMessage message)
@@ -72,7 +72,6 @@ namespace ClientGUI
 
         private void HandleTimeMessage(TimeMessage message)
         {
-            Debug.WriteLine(message);
             AuctionForm.GetInstance().UpdateTimeBox(message.Time);
         }
 

@@ -86,7 +86,7 @@ namespace Server
 
             if (Users.Count >= 2 && StartAuction == true)
             {
-                Auction1.StartAuction(60);
+                Auction1.StartAuction(30);
                 StartAuction = false;
             }
 

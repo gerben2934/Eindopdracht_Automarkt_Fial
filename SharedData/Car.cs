@@ -34,7 +34,7 @@ namespace SharedData
 
         public override string ToString()
         {
-            return $"Bieding: \r\n carID: {CarID} \r\n, brand: {Brand}\r\n, model: {Model}\r\n, description: {Description}\r\n, mileage: {Mileage}\r\n, color: {Color}\r\n, year: {Year}\r\n";
+            return $"Bieding: \r\n brand: {Brand}\r\n model: {Model}\r\n description: {Description}\r\n mileage: {Mileage}\r\n color: {Color}\r\n year: {Year}\r\n";
         }
 
         public string BidsToString(List<Bid> bids)
