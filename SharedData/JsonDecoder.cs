@@ -16,6 +16,8 @@ namespace SharedData
                 return DecodeCarMessage(json);
             if (type == PacketType.BidMessage)
                 return DecodeBidMessage(json);
+            if (type == PacketType.SuccesfullBidder)
+                return DecodeSuccesfullBidderMessage(json);
             return null;
         }
 
@@ -33,6 +35,11 @@ namespace SharedData
         private static OkMessage DecodeOkMessage(dynamic json)
         {
             return OkMessage.ToClass(json);
+        }
+
+        private static SuccesfullBidder DecodeSuccesfullBidderMessage(dynamic json)
+        {
+            return SuccesfullBidder.ToClass(json);
         }
     }
 }

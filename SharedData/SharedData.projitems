@@ -17,5 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Packets\IPacket.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MessageUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packets\OkMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets\SuccesfullBidder.cs" />
   </ItemGroup>
 </Project>
