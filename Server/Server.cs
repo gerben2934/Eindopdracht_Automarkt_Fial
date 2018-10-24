@@ -51,7 +51,7 @@ namespace Server
             Console.WriteLine("Auction started");
 
             Auction1 = new Auction(Users, Cars[0], Bids);
-            Auction1.StartAuction(10);
+            Auction1.StartAuction(420);
 
             Console.ReadKey();
         }
@@ -67,6 +67,9 @@ namespace Server
                 Auction1.StopSession();
                 //Call methods
                 Auction1.SaveAuction();
+                Bid SuccesfullBidder = Auction1.MaxBid;
+                Console.WriteLine("Succesfullbidder: " + SuccesfullBidder);
+                BroadcastAsync(new SuccesfullBidder(SuccesfullBidder));
             }
         }
 
