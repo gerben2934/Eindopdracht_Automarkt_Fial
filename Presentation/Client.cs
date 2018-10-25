@@ -90,7 +90,6 @@ namespace ClientGUI
             TimeSpan t = new TimeSpan(0, 0, seconds);
             string time = t.ToString();
             string timee = time.Substring(3);
-            Console.WriteLine("TIJD: " + timee);
             AuctionForm.GetInstance().UpdateTimeBox(timee);
         }
 
@@ -98,9 +97,7 @@ namespace ClientGUI
         {
             Console.WriteLine("CLIENT: received car Message");
             CurrentCar = message.Car;
-            Console.WriteLine("Currentcar: " + CurrentCar);
-//            AuctionForm.GetInstance().UpdateTextBox(CurrentCar.ToString());
-            AuctionForm.GetInstance().UpdateCar(CurrentCar.Brand, CurrentCar.Model, CurrentCar.Description, CurrentCar.Mileage, CurrentCar.Color, CurrentCar.Year, CurrentCar.CarFuelType);
+            AuctionForm.GetInstance().UpdateCar(CurrentCar);
         }
 
         private void HandleOkMessage(OkMessage message)

@@ -23,13 +23,9 @@ namespace Server
         private bool StartAuction;
 
         private const int SESSIONTIME = 30;
-
         private const ushort PORT = 10000;
-
         private readonly TcpListener _server;
-
-        public static Car ToyotaYaris;
-
+        public static Car Bmw;
 
         public static void Main(string[] args)
         {
@@ -50,12 +46,8 @@ namespace Server
             sessionTimer.AutoReset = true;
             sessionTimer.Elapsed += SessionProgress;
             sessionTimer.Start();
-            Console.WriteLine("Auction started");
-
             Auction1 = new Auction(Users, Cars[0], Bids);
             StartAuction = true;
-            //Auction1.StartAuction(60);
-
             Console.ReadKey();
         }
 
@@ -76,7 +68,6 @@ namespace Server
                 Bid SuccesfullBid = Auction1.MaxBid;
                 Console.WriteLine("Succesfullbidder: " + SuccesfullBid);
                 BroadcastAsync(new SuccesfullBidder(SuccesfullBid));
-        
             }
         }
 
@@ -88,7 +79,7 @@ namespace Server
             if (Users.Count >= 2 && StartAuction == true)
             {
                 Auction1.StartAuction(SESSIONTIME);
-                StartAuction = false;
+                StartAuction = true;
             }
 
             MessageUtil.SendMessage(new CarMessage(Cars[0]), client.GetStream());
@@ -110,18 +101,11 @@ namespace Server
             }
         }
 
-        private static void ClientUpdate(dynamic update)
-        {
-
-        }
-
         public void FillCars()
         {
             List<Bid> bids = new List<Bid>();
-            bids.Add(new Bid("Ralph", 1, 1000, DateTime.Now));
-            ToyotaYaris = new Car(1, "Toyota", "Yaris", "Just a car", 10000, "Red", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
-            ToyotaYaris.ToString();
-            Cars.Add(ToyotaYaris);
+            Bmw = new Car(1, "Bmw", "M4", "Dikke Bmw", 30000, "Blauw", 2014, Car.Status.FORSALE, Car.FuelType.GAS);
+            Cars.Add(Bmw);
         }
     }
 }

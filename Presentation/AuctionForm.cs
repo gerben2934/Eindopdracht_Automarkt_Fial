@@ -32,22 +32,31 @@ namespace Presentation
             return instance;
         }
 
-
-        public void UpdateCar(string brand, string model, string description, int millage, string color, int year, Car.FuelType fueltype)
+        public void UpdateCar(Car car)
         {
-            //instance.messageTextBox.Invoke((Action)(() => { messageTextBox.AppendText("\r\n" + message + "\r\n"); }));
-            instance.BrandLabel.Text = brand;
-            instance.ModelLabel.Text = model;
-            instance.DescriptionLabel.Text = description;
-            instance.MillageLabel.Text = millage.ToString();
-            instance.ColorLabel.Text = color;
-            instance.YearLabel.Text = year.ToString();
-            instance.FuelTypeLabel.Text = fueltype.ToString();
+            UpdateLabel(BrandLabel, car.Brand);
+            UpdateLabel(ModelLabel, car.Model);
+            UpdateLabel(DescriptionLabel, car.Description);
+            UpdateLabel(MillageLabel, car.Mileage.ToString() + " km");
+            UpdateLabel(ColorLabel, car.Color);
+            UpdateLabel(YearLabel, car.Year.ToString());
+            UpdateLabel(FuelTypeLabel, car.CarFuelType.ToString());
+        }
+        private void UpdateLabel(Label label, string text)
+        {
+            label.Invoke(new MethodInvoker(delegate { label.Text = text; }));
+            //Console.WriteLine("Nieuwe text: " + label.Text);
+        }
+
+        private void UpdateTextBox(TextBox textBox, string text)
+        {
+            textBox.Invoke(new MethodInvoker(delegate { messageTextBox.AppendText("\r\n" + text + "\r\n"); }));
+            //Console.WriteLine("Nieuwe text: " + label.Text);
         }
 
         public void UpdateTextBox(string message)
         {
-            instance.messageTextBox.Invoke((Action)(() => { messageTextBox.AppendText("\r\n" + message + "\r\n"); }));
+            UpdateTextBox(messageTextBox, message);
         }
 
         public void UpdateTimeBox(string message)
@@ -55,12 +64,8 @@ namespace Presentation
             instance.messageTextBox.Invoke((Action)(() => { textBoxTimeMessage.Text = message; }));
             if (message.Equals("00:00"))
             {
-                instance.bidButton.Enabled = false;
+                instance.Bieden.Enabled = false;
             }
-        }
-
-        private void UsernameLabel_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
@@ -69,7 +74,7 @@ namespace Presentation
             _client = new Client(instance.usernameLabel.Text);
 
             instance.messageTextBox.AppendText("Je neemt deel aan deze veiling!");
-            instance.bidButton.Enabled = true;
+            instance.Bieden.Enabled = true;
         }
 
         private void bidButton_ClickAsync(object sender, EventArgs e)
