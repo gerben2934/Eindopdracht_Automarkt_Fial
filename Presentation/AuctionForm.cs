@@ -54,6 +54,11 @@ namespace Presentation
             //Console.WriteLine("Nieuwe text: " + label.Text);
         }
 
+        private void UpdateButton(Button button, bool state)
+        {
+            button.Invoke(new MethodInvoker(delegate { button.Enabled = state; }));
+        }
+
         public void UpdateTextBox(string message)
         {
             UpdateTextBox(messageTextBox, message);
@@ -61,16 +66,17 @@ namespace Presentation
 
         public void UpdateTimeBox(string message)
         {
-            instance.messageTextBox.Invoke((Action)(() => { textBoxTimeMessage.Text = message; }));
+            UpdateLabel(textBoxTimeMessage, message);
             if (message.Equals("00:00"))
             {
-                instance.Bieden.Enabled = false;
+                UpdateButton(Bieden, false);
             }
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            instance.connectButton.Enabled = false;
+            UpdateButton(connectButton, false);
+
             _client = new Client(instance.usernameLabel.Text);
 
             instance.messageTextBox.AppendText("Je neemt deel aan deze veiling!");

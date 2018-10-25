@@ -27,17 +27,17 @@ namespace SharedData
 
         public override string ToString()
         {
-            return $"Bieding van: \r\n username: {Username}\r\n amount: {Amount}\r\n time: {Time.ToString("yyyy-MM-dd HH:mm:ss")}";
+            return $"Bieding van: \r\n {Username}\r\n : € {Amount}\r\n Tijd: {Time.ToString("HH:mm:ss")}";
         }
 
         public string BidMessage()
         {
-            return $"Username: {Username} amount: €{Amount}";
+            return $"{Username} bied: € {Amount}";
         }
 
         public string ToStringSucces()
         {
-            return $"Hoogste bieding: \r\n username: {Username}\r\n amount: {Amount}\r\n time: {Time.ToString("yyyy-MM-dd HH:mm:ss")}";
+            return $"Hoogste bieding door: \r\n {Username}\r\n van: € {Amount}\r\n";
         }
 
     }
