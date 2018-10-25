@@ -41,6 +41,10 @@ namespace Presentation
         public void UpdateTimeBox(string message)
         {
             instance.messageTextBox.Invoke((Action)(() => { textBoxTimeMessage.Text = message; }));
+            if (message.Equals("00:00"))
+            {
+                instance.bidButton.Enabled = false;
+            }
         }
 
         private void UsernameLabel_TextChanged(object sender, EventArgs e)
@@ -68,6 +72,7 @@ namespace Presentation
                     return;
                 }
                 int amountI = Convert.ToInt32(amountS);
+                instance.bidTextBox.Text = "";
                 Bid bid = new Bid(_client.Username, _client.CurrentCar.CarID, amountI, DateTime.Now);
                 MessageUtil.SendMessage(new BidMessage(bid), _client.Socket.GetStream());
             }

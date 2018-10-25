@@ -17,6 +17,7 @@ namespace SharedData
         BidMessage,
         CarMessage,
         SuccesfullBidder,
-        TimeMessage
+        TimeMessage,
+        BidErrorMessage
     }
 }

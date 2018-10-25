@@ -20,6 +20,8 @@ namespace SharedData
                 return DecodeSuccesfullBidderMessage(json);
             if (type == PacketType.TimeMessage)
                 return DecodeTimeMessage(json);
+            if (type == PacketType.BidErrorMessage)
+                return DecodeBidErrorMessage(json);
             return null;
         }
 
@@ -47,6 +49,11 @@ namespace SharedData
         private static SuccesfullBidder DecodeSuccesfullBidderMessage(dynamic json)
         {
             return SuccesfullBidder.ToClass(json);
+        }
+
+        private static BidErrorMessage DecodeBidErrorMessage(dynamic json)
+        {
+            return BidErrorMessage.ToClass(json);
         }
     }
 }

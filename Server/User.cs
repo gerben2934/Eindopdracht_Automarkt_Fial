@@ -85,6 +85,11 @@ namespace Server
                 Server.BroadcastAsync(new BidMessage(b));
                 Console.WriteLine("Auto gebroadcast!");
             }
+            else
+            {
+                Console.WriteLine("Bid to low!");
+                MessageUtil.SendMessage(new BidErrorMessage(MaxBid.ToString()), Client.GetStream());
+            }
         }
 
         private void HandleCarMessage(CarMessage message)

@@ -8,16 +8,16 @@ namespace SharedData.Packets
     public class TimeMessage : IPacket
     {
         public PacketType Type => PacketType.TimeMessage;
-        public string Time { get; set; }
+        public int Time { get; set; }
 
-        public TimeMessage(string time)
+        public TimeMessage(int time)
         {
             this.Time = time;
         }
 
         public static IPacket ToClass(dynamic json)
         {
-            string s = (string)json.data.time;
+            int s = (int)json.data.time;
             return new TimeMessage(s);
         }
 

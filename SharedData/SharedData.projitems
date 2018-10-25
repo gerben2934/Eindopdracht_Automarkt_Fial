@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Car.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonDecoder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets\BidErrorMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packets\BidMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packets\CarMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Packets\IPacket.cs" />

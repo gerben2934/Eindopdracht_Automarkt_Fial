@@ -22,6 +22,7 @@ namespace Server
         private readonly System.Timers.Timer sessionTimer;
         private bool StartAuction;
 
+        private const int SESSIONTIME = 30;
 
         private const ushort PORT = 10000;
 
@@ -53,7 +54,7 @@ namespace Server
 
             Auction1 = new Auction(Users, Cars[0], Bids);
             StartAuction = true;
-            //Auction1.StartAuction(10);
+            //Auction1.StartAuction(60);
 
             Console.ReadKey();
         }
@@ -63,8 +64,8 @@ namespace Server
             if (!Auction1.Running) return;
 
             TimeSpan duration = DateTime.UtcNow - Auction1.StartTime;
-
-            BroadcastAsync(new TimeMessage(duration.ToString()));
+            int dur = (int)(SESSIONTIME - duration.TotalSeconds);
+            BroadcastAsync(new TimeMessage(dur));
 
             if (duration.TotalSeconds >= Auction1.AuctionTime)
             {
@@ -86,7 +87,7 @@ namespace Server
 
             if (Users.Count >= 2 && StartAuction == true)
             {
-                Auction1.StartAuction(30);
+                Auction1.StartAuction(SESSIONTIME);
                 StartAuction = false;
             }
 

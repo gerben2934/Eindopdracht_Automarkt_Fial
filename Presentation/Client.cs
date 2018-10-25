@@ -5,6 +5,7 @@ using SharedData;
 using SharedData.Packets;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClientGUI
 {
@@ -51,9 +52,22 @@ namespace ClientGUI
                         case PacketType.TimeMessage:
                             HandleTimeMessage((TimeMessage)message);
                             break;
+                        case PacketType.BidErrorMessage:
+                            HandleBidErrorMessage((BidErrorMessage)message);
+                            break;
                     }
                 }
             });
+        }
+
+        private void HandleBidErrorMessage(BidErrorMessage message)
+        {
+            Console.WriteLine("CLIENT: received BidErrormessage");
+
+            Console.WriteLine(" Message: " + message);
+            string m = message.ToString();
+            string amount = message.ToString();
+            MessageBox.Show("Bied hoger dan: € " + message.Message, "Uw bod was te laag!");
         }
 
         private void HandleSuccesfullBidderMessage(SuccesfullBidder message)
@@ -72,7 +86,12 @@ namespace ClientGUI
 
         private void HandleTimeMessage(TimeMessage message)
         {
-            AuctionForm.GetInstance().UpdateTimeBox(message.Time);
+            int seconds = message.Time;
+            TimeSpan t = new TimeSpan(0, 0, seconds);
+            string time = t.ToString();
+            string timee = time.Substring(3);
+            Console.WriteLine("TIJD: " + timee);
+            AuctionForm.GetInstance().UpdateTimeBox(timee);
         }
 
         private void HandleCarMessage(CarMessage message)
