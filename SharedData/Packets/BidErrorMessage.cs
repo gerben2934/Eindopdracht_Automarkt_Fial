@@ -16,7 +16,7 @@ namespace SharedData.Packets
             }
      **/
 
-    class BidErrorMessage : IPacket
+    public class BidErrorMessage : IPacket
     {
         public PacketType Type => PacketType.BidErrorMessage;
         public string Message { get; set; }

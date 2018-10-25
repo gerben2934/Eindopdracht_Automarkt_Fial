@@ -81,7 +81,7 @@ namespace ClientGUI
         {
             Console.WriteLine("CLIENT: received bid message");
             Bid b = message.Bid;
-            AuctionForm.GetInstance().UpdateTextBox(b.ToString());
+            AuctionForm.GetInstance().UpdateTextBox(b.BidMessage());
         }
 
         private void HandleTimeMessage(TimeMessage message)
@@ -99,7 +99,8 @@ namespace ClientGUI
             Console.WriteLine("CLIENT: received car Message");
             CurrentCar = message.Car;
             Console.WriteLine("Currentcar: " + CurrentCar);
-            AuctionForm.GetInstance().UpdateTextBox(CurrentCar.ToString());
+//            AuctionForm.GetInstance().UpdateTextBox(CurrentCar.ToString());
+            AuctionForm.GetInstance().UpdateCar(CurrentCar.Brand, CurrentCar.Model, CurrentCar.Description, CurrentCar.Mileage, CurrentCar.Color, CurrentCar.Year, CurrentCar.CarFuelType);
         }
 
         private void HandleOkMessage(OkMessage message)

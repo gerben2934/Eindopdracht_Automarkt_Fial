@@ -40,23 +40,40 @@ namespace Presentation
             this.label3 = new System.Windows.Forms.Label();
             this.userCount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxTimeMessage = new System.Windows.Forms.TextBox();
+            this.textBoxTimeMessage = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.BrandLabel = new System.Windows.Forms.Label();
+            this.ModelLabel = new System.Windows.Forms.Label();
+            this.DescriptionLabel = new System.Windows.Forms.Label();
+            this.MillageLabel = new System.Windows.Forms.Label();
+            this.ColorLabel = new System.Windows.Forms.Label();
+            this.YearLabel = new System.Windows.Forms.Label();
+            this.FuelTypeLabel = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // messageTextBox
             // 
-            this.messageTextBox.Location = new System.Drawing.Point(91, 268);
+            this.messageTextBox.Location = new System.Drawing.Point(79, 709);
             this.messageTextBox.Multiline = true;
             this.messageTextBox.Name = "messageTextBox";
             this.messageTextBox.ReadOnly = true;
             this.messageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageTextBox.Size = new System.Drawing.Size(454, 522);
+            this.messageTextBox.Size = new System.Drawing.Size(454, 304);
             this.messageTextBox.TabIndex = 0;
             this.messageTextBox.WordWrap = false;
             // 
             // bidTextBox
             // 
-            this.bidTextBox.Location = new System.Drawing.Point(696, 389);
+            this.bidTextBox.Location = new System.Drawing.Point(672, 816);
             this.bidTextBox.Name = "bidTextBox";
             this.bidTextBox.Size = new System.Drawing.Size(228, 26);
             this.bidTextBox.TabIndex = 1;
@@ -64,7 +81,7 @@ namespace Presentation
             // bidButton
             // 
             this.bidButton.Enabled = false;
-            this.bidButton.Location = new System.Drawing.Point(742, 492);
+            this.bidButton.Location = new System.Drawing.Point(718, 919);
             this.bidButton.Name = "bidButton";
             this.bidButton.Size = new System.Drawing.Size(152, 52);
             this.bidButton.TabIndex = 2;
@@ -113,7 +130,7 @@ namespace Presentation
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(630, 282);
+            this.label3.Location = new System.Drawing.Point(606, 709);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(400, 37);
             this.label3.TabIndex = 7;
@@ -141,16 +158,194 @@ namespace Presentation
             // 
             // textBoxTimeMessage
             // 
-            this.textBoxTimeMessage.Location = new System.Drawing.Point(494, 193);
+            this.textBoxTimeMessage.AutoSize = true;
+            this.textBoxTimeMessage.Location = new System.Drawing.Point(490, 197);
             this.textBoxTimeMessage.Name = "textBoxTimeMessage";
-            this.textBoxTimeMessage.Size = new System.Drawing.Size(163, 26);
-            this.textBoxTimeMessage.TabIndex = 10;
+            this.textBoxTimeMessage.Size = new System.Drawing.Size(43, 20);
+            this.textBoxTimeMessage.TabIndex = 11;
+            this.textBoxTimeMessage.Text = "Time";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(86, 251);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(269, 29);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Auto om op te bieden:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(86, 309);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 25);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Brand:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(86, 345);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(78, 25);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Model:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(86, 382);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(127, 25);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Description:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(86, 422);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 25);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Millage:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(86, 466);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 25);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Color:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(86, 508);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(64, 25);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Year:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(86, 544);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(110, 25);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "FuelType:";
+            // 
+            // BrandLabel
+            // 
+            this.BrandLabel.AutoSize = true;
+            this.BrandLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrandLabel.Location = new System.Drawing.Point(386, 309);
+            this.BrandLabel.Name = "BrandLabel";
+            this.BrandLabel.Size = new System.Drawing.Size(64, 25);
+            this.BrandLabel.TabIndex = 19;
+            this.BrandLabel.Text = "Brand";
+            // 
+            // ModelLabel
+            // 
+            this.ModelLabel.AutoSize = true;
+            this.ModelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModelLabel.Location = new System.Drawing.Point(386, 345);
+            this.ModelLabel.Name = "ModelLabel";
+            this.ModelLabel.Size = new System.Drawing.Size(66, 25);
+            this.ModelLabel.TabIndex = 20;
+            this.ModelLabel.Text = "Model";
+            // 
+            // DescriptionLabel
+            // 
+            this.DescriptionLabel.AutoSize = true;
+            this.DescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescriptionLabel.Location = new System.Drawing.Point(386, 382);
+            this.DescriptionLabel.Name = "DescriptionLabel";
+            this.DescriptionLabel.Size = new System.Drawing.Size(109, 25);
+            this.DescriptionLabel.TabIndex = 21;
+            this.DescriptionLabel.Text = "Description";
+            // 
+            // MillageLabel
+            // 
+            this.MillageLabel.AutoSize = true;
+            this.MillageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MillageLabel.Location = new System.Drawing.Point(386, 422);
+            this.MillageLabel.Name = "MillageLabel";
+            this.MillageLabel.Size = new System.Drawing.Size(74, 25);
+            this.MillageLabel.TabIndex = 22;
+            this.MillageLabel.Text = "Millage";
+            // 
+            // ColorLabel
+            // 
+            this.ColorLabel.AutoSize = true;
+            this.ColorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColorLabel.Location = new System.Drawing.Point(386, 466);
+            this.ColorLabel.Name = "ColorLabel";
+            this.ColorLabel.Size = new System.Drawing.Size(59, 25);
+            this.ColorLabel.TabIndex = 23;
+            this.ColorLabel.Text = "Color";
+            // 
+            // YearLabel
+            // 
+            this.YearLabel.AutoSize = true;
+            this.YearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.YearLabel.Location = new System.Drawing.Point(386, 508);
+            this.YearLabel.Name = "YearLabel";
+            this.YearLabel.Size = new System.Drawing.Size(53, 25);
+            this.YearLabel.TabIndex = 24;
+            this.YearLabel.Text = "Year";
+            // 
+            // FuelTypeLabel
+            // 
+            this.FuelTypeLabel.AutoSize = true;
+            this.FuelTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FuelTypeLabel.Location = new System.Drawing.Point(386, 544);
+            this.FuelTypeLabel.Name = "FuelTypeLabel";
+            this.FuelTypeLabel.Size = new System.Drawing.Size(95, 25);
+            this.FuelTypeLabel.TabIndex = 25;
+            this.FuelTypeLabel.Text = "FuelType";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(81, 642);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(132, 29);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Biedingen";
             // 
             // AuctionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1050, 835);
+            this.ClientSize = new System.Drawing.Size(1050, 1119);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.FuelTypeLabel);
+            this.Controls.Add(this.YearLabel);
+            this.Controls.Add(this.ColorLabel);
+            this.Controls.Add(this.MillageLabel);
+            this.Controls.Add(this.DescriptionLabel);
+            this.Controls.Add(this.ModelLabel);
+            this.Controls.Add(this.BrandLabel);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxTimeMessage);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.userCount);
@@ -181,7 +376,24 @@ namespace Presentation
         private System.Windows.Forms.Label label3;
         private Label userCount;
         private Label label4;
-        private TextBox textBoxTimeMessage;
+        private Label textBoxTimeMessage;
+        private Label label5;
+        private FontDialog fontDialog1;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private Label label12;
+        private Label BrandLabel;
+        private Label ModelLabel;
+        private Label DescriptionLabel;
+        private Label MillageLabel;
+        private Label ColorLabel;
+        private Label YearLabel;
+        private Label FuelTypeLabel;
+        private Label label13;
     }
 }
 

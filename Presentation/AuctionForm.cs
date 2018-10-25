@@ -33,6 +33,18 @@ namespace Presentation
         }
 
 
+        public void UpdateCar(string brand, string model, string description, int millage, string color, int year, Car.FuelType fueltype)
+        {
+            //instance.messageTextBox.Invoke((Action)(() => { messageTextBox.AppendText("\r\n" + message + "\r\n"); }));
+            instance.BrandLabel.Text = brand;
+            instance.ModelLabel.Text = model;
+            instance.DescriptionLabel.Text = description;
+            instance.MillageLabel.Text = millage.ToString();
+            instance.ColorLabel.Text = color;
+            instance.YearLabel.Text = year.ToString();
+            instance.FuelTypeLabel.Text = fueltype.ToString();
+        }
+
         public void UpdateTextBox(string message)
         {
             instance.messageTextBox.Invoke((Action)(() => { messageTextBox.AppendText("\r\n" + message + "\r\n"); }));
